@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
         this.msg = "Invalid userName or Password"
       }
      )
-    
   }
+
+
 }

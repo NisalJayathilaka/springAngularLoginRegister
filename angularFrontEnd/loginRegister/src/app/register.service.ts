@@ -15,4 +15,9 @@ export class RegisterService {
   public userLogin(user:User):Observable<any>{
      return this.http.post<any>(`${this.apiServeUrl}/api/v1/user/login`,user);
   }
+
+
+  public userRegister(user:User):Observable<any>{
+    return this.http.post<any>(`${this.apiServeUrl}/api/v1/user`,user);
+  }
 }
