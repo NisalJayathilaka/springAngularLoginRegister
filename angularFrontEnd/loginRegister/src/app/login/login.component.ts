@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  Router,NavigationExtras } from '@angular/router';
 import { RegisterService } from '../register.service';
 import { User } from '../user';
 
@@ -11,6 +11,7 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
    
    user = new User();
+   singleUser = new User();
    msg:string = ''
   constructor(private regiserService:RegisterService, private router: Router ) { }
 
@@ -19,13 +20,19 @@ export class LoginComponent implements OnInit {
 
   loginUser(){
      this.regiserService.userLogin(this.user).subscribe(
-       data => {console.log(data.userName);
-          this.router.navigate(['/loginsucess'])},
+       data => {
+         this.singleUser = data;
+         const navigationExtras: NavigationExtras = {state: {example: data}};
+          this.router.navigate(['/loginsucess'], navigationExtras )
+        },
        error => {console.log("exception");
         this.msg = "Invalid userName or Password"
       }
      )
+     console.log(this.singleUser);
+     
   }
-
+   
+  
 
 }
